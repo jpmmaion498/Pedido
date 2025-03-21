@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Pedido.Api/Dockerfile
+    container_name: pedidos-api
+    ports:
+      - "8080:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+    depends_on:
+      - postgres
+      - localstack
+    networks:
+      - pedidos-network
+
+  postgres:
+    image: postgres:15
+    container_name: pedidos-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - pedidos-network
+
+  localstack:
+    image: localstack/localstack:latest
+    container_name: pedidos-localstack
+    environment:
+      - SERVICES=sqs,s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - DEFAULT_REGION=us-east-1
+    ports:
+      - "4567:4566"
+    volumes:
+      - localstack_data:/tmp/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - pedidos-network
+
+volumes:
+  postgres_data:
+  localstack_data:
+
+networks:
+  pedidos-network:
+    driver: bridge
