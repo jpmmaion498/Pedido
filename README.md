@@ -148,24 +148,13 @@ Todos os logs da aplicação estão estruturados com Serilog:
 
 ---
 
-## 🧪 Testes
-
-> Testes automatizados ainda não foram implementados.
-
----
-
 ## ✉️ Contato
-
+(18)996478579
+joaopedromaion498@gmail.com ou joao.maion@levva.io
 Se tiver dúvidas ou sugestões, fique à vontade para abrir uma issue ou me chamar!
 
 ---
 
 
 ---
-
-## 🎥 Demonstração
-
-![Swagger em funcionamento](./docs/swagger-demo.gif)
-
-> Você pode gravar um GIF com uma ferramenta como [ScreenToGif](https://www.screentogif.com/) ou [LiceCap](https://www.cockos.com/licecap/) e salvar em `docs/swagger-demo.gif` para ser exibido aqui.
 
