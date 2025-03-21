@@ -16,8 +16,7 @@ namespace Pedido.Infrastructure.Context
         public DbSet<ItemPedidoEntity> ItensPedido { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // 🔹 Definir chave primária para `ItemPedidoEntity`
+        {            
             modelBuilder.UseSerialColumns();
 
             modelBuilder.Entity<PedidoEntity>()
